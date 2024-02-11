@@ -1,0 +1,37 @@
+int countMatchingSubarrays(vector<int>& nums, vector<int>& pattern) {
+
+        int n = nums.size();
+    int m = pattern.size();
+    int count = 0;
+
+    int i=0, j=0;
+        while(j<nums.size()){
+            bool match= true;
+            if(j-i+1<m+1){
+                j++;
+            }
+            else if(j-i+1== m+1){
+                for (int k = 0; k < m; k++) {
+            if (pattern[k] == 1 && nums[i + k + 1] <= nums[i + k]) {
+                match = false;
+                break;
+            } else if (pattern[k] == -1 && nums[i + k + 1] >= nums[i + k]) {
+                match = false;
+                break;
+            } else if (pattern[k] == 0 && nums[i + k + 1] != nums[i + k]) {
+                match = false;
+                break;
+            }
+        }
+
+        // If all elements in the pattern match, increment count
+        if (match) {
+            count++;
+        }
+                j++;
+                i++;
+            }
+        }
+
+    return count;
+    }
