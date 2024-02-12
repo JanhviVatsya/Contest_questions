@@ -1,0 +1,20 @@
+link: https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-i/description/
+
+Approach
+find frequency of each character
+then sort the frequency
+First 8 frequncy count should use the single key press then next 8 double key press and the next 8 will hit 3 key press and so on.
+So multiple the char count and corresponding key hits to get final ans
+
+ int minimumPushes(string word) {
+        vector<int> freq(26,0);
+        for(auto c:word){
+            freq[c-'a']++;
+        }
+        sort(freq.begin(), freq.end(), greater<int>());
+        int count=0;
+        for(int i=0; i<26; i++){
+            count+=freq[i]*((i/8)+1);
+        }
+        return count;
+    }
