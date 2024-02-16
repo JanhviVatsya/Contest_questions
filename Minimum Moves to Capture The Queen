@@ -1,0 +1,23 @@
+link: https://leetcode.com/problems/minimum-moves-to-capture-the-queen/description/
+
+Approach
+Max possilbe move is 2. What ever is the configuration, queen can be captured in 2 moves
+Now when ever the two pieces are head to head and the third pice is not in between them then we can capture queen in 1 step. This can be possible in 4 different ways :
+rook and queen in same row
+rook and queen in the same column
+bishop and queen in the same anti- diagonal
+bishop and queen in the same diagonal
+Only check for above four cases along with the check that the 3rd piece is not in between two direct capture.
+Complexity
+Time complexity: O(1)
+
+Space complexity: O(1)
+
+code:
+int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
+    if(a == e && !(a == c && d > min(b,f) && d < max(b,f) )) return 1; //rook and queen in same row
+    if(b == f && !(b == d && c > min(a,e) && c < max(a,e) ))  return 1;  //rook and queen in the same column
+    if(c + d == e + f && !(c + d == a + b && a > min(c , e) && a < max(c, e) )) return 1;  //bishop and queen in the same anti- diagonal
+    if(c-d == e-f && !( c-d == a-b && a > min(c , e) && a < max(c, e) )) return 1;  // bishop and queen in the same diagonal
+    return 2;
+}
